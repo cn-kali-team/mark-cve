@@ -1,0 +1,35 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="options.js" type="module" defer></script>
+    <title>Mark CVE Options</title>
+</head>
+
+<body>
+<div class="container">
+    <fieldset>
+        <legend>Options</legend>
+        <div class="input-container">
+            <div class="outer-wrapper">
+                <div class="new-note">
+                    <label for="base_url">BaseURL
+                        <input id="base_url" type="text" placeholder="https://scap.kali-team.cn/cve/+ID">
+                    </label>
+                    <button id="update">Update BaseURL</button>
+                    <button id="reset">Reset BaseURL</button>
+                </div>
+            </div>
+            <div class="hint" id="theme-hint">
+                Setting the baseURL will use the specified URL prefix followed by cve.
+                default: https://scap.kali-team.cn/cve/
+            </div>
+        </div>
+    </fieldset>
+</div>
+</body>
+
+</html>
