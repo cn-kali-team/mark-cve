@@ -17,7 +17,7 @@
 
 - Install the plugin, open a webpage with a CVE number, click on the plugin, and you will see a button added after the CVE.
 
-![](docs/Screenshot AttackerKB.png)
+![](docs/AttackerKB.png)
 
 ## Bookmark JavaScript
 - Create a bookmark, Edit the `URL` as the following `javascript:` [script](content-script.js).
