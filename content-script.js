@@ -1,4 +1,20 @@
-(function () {
+// ==UserScript==
+// @name         Mark CVE
+// @namespace    http://tampermonkey.net/
+// @version      0.1.2
+// @description  Mark the current page CVE
+// @author       Kali-Team
+// @match        *://*/*
+// @exclude      https://scap.kali-team.cn/*
+// @icon         https://avatars.githubusercontent.com/u/99640169?s=200&v=4
+// @grant        none
+// @run-at       document-idle
+// @homepage     https://github.com/cn-kali-team/mark-cve
+// @license      GPL-3.0-only
+// ==/UserScript==
+
+(function() {
+    'use strict';
     let DefaultBaseUrl = 'https://scap.kali-team.cn/cve/';
 
     function GetBaseURL() {
@@ -39,6 +55,9 @@
 
     function FindCVE() {
         GetBaseURL();
+        if (DefaultBaseUrl.startsWith(location.hostname)){
+            return;
+        }
         const regex = new RegExp('\\bCVE-\\d{4}-\\d{4,7}\\b', 'gmi');
         document.designMode = "on";
         const sel = window.getSelection();

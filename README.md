@@ -21,3 +21,9 @@
 
 ## Bookmark JavaScript
 - Create a bookmark, Edit the `URL` as the following `javascript:` [script](content-script.js).
+
+![](docs/bookmark.png)
+
+## Tampermonkey
+
+- Install from [greasyfork](https://greasyfork.org/zh-CN/scripts/488293-mark-cve)
