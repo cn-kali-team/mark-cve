@@ -13,7 +13,7 @@
 // @license      GPL-3.0-only
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
     let DefaultBaseUrl = 'https://scap.kali-team.cn/cve/';
 
@@ -34,14 +34,14 @@
 
     function Mark() {
         const userSelection = window.getSelection();
-        const id = userSelection.toString();
-        let cve = userSelection.getRangeAt(0).startContainer.parentNode;
+        const id = userSelection.toString().toLocaleUpperCase();
+        const selectedTextRange = userSelection.getRangeAt(0);
+        let cve = selectedTextRange.startContainer.parentNode;
         if (cve.getElementsByClassName("Marked").length > 0) {
             return;
         }
         const spanElement = document.createElement("span");
         spanElement.setAttribute("class", "Marked");
-        const selectedTextRange = userSelection.getRangeAt(0);
         selectedTextRange.surroundContents(spanElement);
         const icon = document.createElement("a");
         icon.href = DefaultBaseUrl + id;
@@ -55,19 +55,25 @@
 
     function FindCVE() {
         GetBaseURL();
-        if (DefaultBaseUrl.startsWith(location.hostname)){
+        if (DefaultBaseUrl.startsWith(location.hostname)) {
             return;
         }
         const regex = new RegExp('\\bCVE-\\d{4}-\\d{4,7}\\b', 'gmi');
-        document.designMode = "on";
-        const sel = window.getSelection();
-        sel.collapse(document.body, 0);
         let m;
+        let cve_arr = [];
         while (m = regex.exec(document.body.innerText)) {
-            while (window.find(m)) {
-                Mark();
-            }
+            cve_arr.push(m.toString().toLocaleUpperCase());
         }
+        document.designMode = "on";
+        Array.from(new Set(cve_arr)).forEach(cve => {
+            const sel = window.getSelection();
+            sel.collapse(document.body, 0);
+            while (window.find(cve)) {
+                Mark();
+                sel.collapseToEnd();
+            }
+        });
+        window.scrollTo(0, 0);
         document.designMode = "off";
     }
 
