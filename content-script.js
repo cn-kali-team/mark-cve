@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mark CVE
 // @namespace    http://tampermonkey.net/
-// @version      0.1.2
+// @version      0.1.3
 // @description  Mark the current page CVE
 // @author       Kali-Team
 // @match        *://*/*
@@ -37,7 +37,10 @@
         const id = userSelection.toString().toLocaleUpperCase();
         const selectedTextRange = userSelection.getRangeAt(0);
         let cve = selectedTextRange.startContainer.parentNode;
-        if (cve.getElementsByClassName("Marked").length > 0) {
+        if (cve.querySelector(".Marked") != null || cve.getAttribute("class") === "Marked") {
+            return;
+        }
+        if (["A", "CODE"].includes(cve.tagName)) {
             return;
         }
         const spanElement = document.createElement("span");
@@ -72,6 +75,8 @@
                 Mark();
                 sel.collapseToEnd();
             }
+            Mark();
+            sel.collapseToEnd();
         });
         window.scrollTo(0, 0);
         document.designMode = "off";

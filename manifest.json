@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Mark CVE",
   "description": "Mark the current page CVE",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage_url": "https://github.com/cn-kali-team/mark-cve",
   "author": "Kali-Team",
   "action": {
